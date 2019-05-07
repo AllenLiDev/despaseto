@@ -4,7 +4,10 @@ import Subjects from './SubjectsSidebar/Subjects';
 import ContentArea from './ContentArea/SubjectPage';
 
 class App extends React.Component {
-    state = {subjectId: 1};
+    constructor(props) {
+        super(props);
+        this.state = { subjectId: 0 };
+    }
 
     testData = [
         {
@@ -37,8 +40,9 @@ class App extends React.Component {
         }
     ];
 
-    changeSubject(key) {
-        this.setState({subjectId: key})
+    changeSubject= (id) => {
+        console.log('change key to: ' + id);
+        this.setState({ subjectId: id });
     }
 
 
@@ -46,7 +50,7 @@ class App extends React.Component {
         return (
             <div className="container-fluid">
                 <Header />
-                <Subjects data={this.testData}/>
+                <Subjects data={this.testData} changeSubject={this.changeSubject} />
                 <ContentArea subjectId={this.subjectId} />
             </div>
         );
