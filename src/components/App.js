@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Subjects from './SubjectsSidebar/Subjects';
-import ContentArea from './ContentArea/SubjectPage';
+import SubjectPage from './ContentArea/SubjectPage';
 
 class App extends React.Component {
     constructor(props) {
@@ -11,17 +11,32 @@ class App extends React.Component {
 
     testData = [
         {
+            id: 0,
+        },
+        {
             id: 1,
             subjectName: 'GGL',
             subjectInfo: [
-                { Title: 'Google' },
                 {
-                    Link: [
-                        { Text: 'Link' },
-                        { URL: 'google.ca' }
-                    ]
+                    content: {
+                        type: 1,
+                        text: 'This is section header'
+                    }
                 },
-                { Image: 'https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjh_vXakIjiAhUTCXwKHSETCNIQjRx6BAgBEAU&url=https%3A%2F%2Ficonscout.com%2Fsearch%3Fasset%3Dicon%26color%3D%2523FE7058%26product_type%3Ditem%26query%3DAvatar%26sort%3Dpopular&psig=AOvVaw1R17R6Gzloo6EzOhSBFkJ1&ust=1557274227323644' }
+                {
+                    content: {
+                        type: 2,
+                        text: 'Apr 18 - Polynomials',
+                        url: 'www.google.ca'
+                    }
+                },
+                {
+                    content:
+                    {
+                        type: 3,
+                        url: 'images/avatar.png'
+                    }
+                }
             ]
         },
         {
@@ -40,7 +55,7 @@ class App extends React.Component {
         }
     ];
 
-    changeSubject= (id) => {
+    changeSubject = (id) => {
         console.log('change key to: ' + id);
         this.setState({ subjectId: id });
     }
@@ -51,7 +66,7 @@ class App extends React.Component {
             <div className="container-fluid">
                 <Header />
                 <Subjects data={this.testData} changeSubject={this.changeSubject} />
-                <ContentArea subjectId={this.subjectId} />
+                <SubjectPage data={this.testData[this.state.subjectId]} />
             </div>
         );
     }
