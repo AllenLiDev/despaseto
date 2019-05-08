@@ -7,7 +7,7 @@ class SubjectPageElement extends React.Component {
         if (content.type === 1) { //header
             return (
                 // if new headr already exists add end line then header
-                <h1>{content.text}</h1>
+                <h3>{content.text}</h3>
             );
         } else if (content.type === 2) { //link
             return (

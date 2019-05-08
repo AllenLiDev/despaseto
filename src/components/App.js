@@ -12,6 +12,15 @@ class App extends React.Component {
     testData = [
         {
             id: 0,
+            subjectName: 'HomePage',
+            subjectInfo: [
+                {
+                    content: {
+                        type: 1,
+                        text: 'This is where homepage content loads'
+                    }
+                }
+            ]
         },
         {
             id: 1,
@@ -20,7 +29,7 @@ class App extends React.Component {
                 {
                     content: {
                         type: 1,
-                        text: 'This is section header'
+                        text: 'This a section header'
                     }
                 },
                 {
