@@ -6,9 +6,10 @@ class Subject extends React.Component {
     }
 
     render() {
-        const {id, title} = this.props;
+        const {id, title, activeId} = this.props;
+        let classname = (id === activeId ? 'list-group-item active' : 'list-group-item');
         return(
-            <div className='list-group-item' onClick={() => this.changeSubject(id)}>{title}</div>
+            <div className={classname} onClick={() => this.changeSubject(id)}>{title}</div>
         );
     }
 }
