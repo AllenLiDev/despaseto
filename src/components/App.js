@@ -7,7 +7,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            subjectId: 0, testData: [
+            admin: 0, subjectId: 0, testData: [
                 {
                     id: 0,
                     subjectName: 'HomePage',
@@ -65,22 +65,26 @@ class App extends React.Component {
     changeSubject = (id) => {
         this.setState({ subjectId: id });
     }
-    
+
     updateData = (input) => {
-        
+
     }
 
+    accessAdmin = () => {
+        console.log('Admin ACCESSED!');
+        this.setState({ admin: 1 });
+    }
 
     render() {
         return (
             <div className="container">
-                <Header />
+                <Header accessAdmin={this.accessAdmin} />
                 <div className="row">
                     <div className="col-3">
-                        <Subjects data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId} />
+                        <Subjects data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId}  />
                     </div>
                     <div className="col-9">
-                        <SubjectPage data={this.state.testData[this.state.subjectId]} />
+                        <SubjectPage data={this.state.testData[this.state.subjectId]} admin={this.state.admin} />
                     </div>
                 </div>
             </div>
