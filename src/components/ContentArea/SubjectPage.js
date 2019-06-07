@@ -7,14 +7,16 @@ class SubjectPage extends React.Component {
     render() {
         let count = 0;
         const { subjectName, subjectInfo } = this.props.data;
-        if (this.props.admin == 1) {
+        if (this.props.admin === 1) {
             const SubjectContent = subjectInfo.map((content) => {
                 return <SubjectPageElementAdmin key={count++} content={content} />
             });
             return (
                 <div className="container">
-                    <h1>{subjectName}</h1>
-                    {SubjectContent}
+                    <h1 className="bg-primary rounded">{subjectName}</h1>
+                    <ul className="list-group">
+                        {SubjectContent}
+                    </ul>
                 </div>
             );
         } else {
