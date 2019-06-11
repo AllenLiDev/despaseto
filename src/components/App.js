@@ -38,8 +38,7 @@ class App extends React.Component {
                             }
                         },
                         {
-                            content:
-                            {
+                            content: {
                                 type: 3,
                                 url: 'images/avatar.png'
                             }
@@ -66,8 +65,18 @@ class App extends React.Component {
         this.setState({ subjectId: id });
     }
 
-    updateData = (input) => {
-
+    shiftData = (direction, key) => {
+        let temp = this.state.testData;
+        if(direction === 1) {
+            let tempData = temp[this.state.subjectId].subjectInfo[key];
+            temp[this.state.subjectId].subjectInfo[key] = temp[this.state.subjectId].subjectInfo[key - 1];
+            temp[this.state.subjectId].subjectInfo[key - 1] = tempData;
+        } else {
+            let tempData = temp[this.state.subjectId].subjectInfo[key];
+            temp[this.state.subjectId].subjectInfo[key] = temp[this.state.subjectId].subjectInfo[key + 1];
+            temp[this.state.subjectId].subjectInfo[key + 1] = tempData;
+        }
+        this.setState({ testData: temp })
     }
 
     accessAdmin = () => {
@@ -81,10 +90,10 @@ class App extends React.Component {
                 <Header accessAdmin={this.accessAdmin} />
                 <div className="row">
                     <div className="col-3">
-                        <Subjects data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId}  />
+                        <Subjects data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId} />
                     </div>
                     <div className="col-9">
-                        <SubjectPage data={this.state.testData[this.state.subjectId]} admin={this.state.admin} />
+                        <SubjectPage data={this.state.testData[this.state.subjectId]} admin={this.state.admin} shiftData={this.shiftData} />
                     </div>
                 </div>
             </div>
