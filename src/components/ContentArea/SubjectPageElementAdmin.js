@@ -12,9 +12,9 @@ class SubjectPageElementAdmin extends React.Component {
                 <div className="flex-grow-1 p-2">{content.text}</div>
                 <ElementIcon type={5} id={this.props.id} moveElement={this.props.moveElement} />
                 <ElementIcon type={6} id={this.props.id} moveElement={this.props.moveElement} />
-                <ElementIcon type={4} />
+                <ElementIcon type={content.visibility ? 4 : 9} id={this.props.id} updateElement={this.props.updateElement} />
                 <ElementIcon type={7} />
-                <ElementIcon type={8} />
+                <ElementIcon type={8} id={this.props.id} removeElement={this.props.removeElement} />
             </li>
         );
     }

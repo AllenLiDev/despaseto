@@ -18,16 +18,24 @@ class SubjectPage extends React.Component {
         }
     }
 
+    updateElement = (key) => {
+        this.props.updateVisibility(key);
+    }
+
+    removeElement = (key) => {
+        this.props.removeData(key);
+    }
+
     render() {
         let count = 0;
         const { subjectName, subjectInfo } = this.props.data;
         if (this.props.admin === 1) {
             const SubjectContent = subjectInfo.map((content) => {
-                return <SubjectPageElementAdmin key={count} id={count++} content={content} moveElement={this.moveElement}/>
+                return <SubjectPageElementAdmin key={count} id={count++} content={content} updateElement={this.updateElement} moveElement={this.moveElement} removeElement={this.removeElement}/>
             });
             return (
                 <div className="container">
-                    <h1 className="bg-primary rounded">{subjectName}</h1>
+                    <h1 className="rounded">{subjectName}</h1>
                     <ul className="list-group">
                         {SubjectContent}
                     </ul>
