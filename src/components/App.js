@@ -91,7 +91,7 @@ class App extends React.Component {
 
     updateVisibility = (key) => {
         let temp = this.state.testData;
-        temp[this.state.subjectId].subjectInfo[key].content.visibility = temp[this.state.subjectId].subjectInfo[key].content.visibility == 1 ? 0 : 1;
+        temp[this.state.subjectId].subjectInfo[key].content.visibility = temp[this.state.subjectId].subjectInfo[key].content.visibility === 1 ? 0 : 1;
         this.setState({ testData: temp });
     }
 
@@ -105,6 +105,11 @@ class App extends React.Component {
         this.setState({ admin: 1 });
     }
 
+    addData = () => {
+        let temp = this.state.testData;
+        this.setState({ testData: temp });
+    }
+
     render() {
         return (
             <div className="container">
@@ -114,7 +119,7 @@ class App extends React.Component {
                         <Subjects data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId} />
                     </div>
                     <div className="col-9">
-                        <SubjectPage data={this.state.testData[this.state.subjectId]} admin={this.state.admin} updateVisibility={this.updateVisibility} shiftData={this.shiftData} removeData={this.removeData} />
+                        <SubjectPage data={this.state.testData[this.state.subjectId]} admin={this.state.admin} updateVisibility={this.updateVisibility} addData={this.addData} shiftData={this.shiftData} removeData={this.removeData} />
                     </div>
                 </div>
             </div>

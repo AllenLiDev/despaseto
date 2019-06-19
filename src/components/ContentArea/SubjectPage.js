@@ -1,21 +1,21 @@
 import React from 'react'
 import SubjectPageElement from './SubjectPageElement';
 import SubjectPageElementAdmin from './SubjectPageElementAdmin';
+import ElementIcon from './ElementIcon';
 
 class SubjectPage extends React.Component {
 
-    moveElement = (direction, key) => {
-        if(direction === "up"){
-            if(key === 0){
-                return null;
-            }
-            this.props.shiftData(1, key);
-        } else if (direction === "down") {
-            if(key === (this.props.data.subjectInfo.length - 1)){
-                return null;
-            }
-            this.props.shiftData(2, key);
+    moveUpElement = (key) => {
+        if (key === 0) {
+            return null;
         }
+        this.props.shiftData(1, key);
+    }
+    moveDownElement = (key) => {
+        if (key === (this.props.data.subjectInfo.length - 1)) {
+            return null;
+        }
+        this.props.shiftData(2, key);
     }
 
     updateElement = (key) => {
@@ -26,16 +26,23 @@ class SubjectPage extends React.Component {
         this.props.removeData(key);
     }
 
+    addElement = (key) => {
+        this.props.addData(key);
+    }
+
     render() {
         let count = 0;
         const { subjectName, subjectInfo } = this.props.data;
         if (this.props.admin === 1) {
             const SubjectContent = subjectInfo.map((content) => {
-                return <SubjectPageElementAdmin key={count} id={count++} content={content} updateElement={this.updateElement} moveElement={this.moveElement} removeElement={this.removeElement}/>
+                return <SubjectPageElementAdmin key={count} id={count++} content={content} updateElement={this.updateElement} moveUpElement={this.moveUpElement} moveDownElement={this.moveDownElement} removeElement={this.removeElement} />
             });
             return (
                 <div className="container">
-                    <h1 className="rounded">{subjectName}</h1>
+                    <div className="d-flex align-items-center">
+                        <h2 className="flex-grow-1">{subjectName}</h2>
+                        <ElementIcon type={'plus'} />
+                    </div>
                     <ul className="list-group">
                         {SubjectContent}
                     </ul>
