@@ -15,60 +15,19 @@ class App extends React.Component {
                 subjectInfo: [
                     {
                         content: {
-                            type: 1,
+                            type: 'heading',
                             visibility: 1,
-                            text: 'This is where homepage content loads'
-                        }
-                    }
-                ]
-            },
-            {
-                id: 1,
-                subjectName: 'FMP 10',
-                subjectInfo: [
-                    {
-                        content: {
-                            type: 1,
-                            visibility: 1,
-                            text: 'This a section header'
-                        }
-                    },
-                    {
-                        content: {
-                            type: 2,
-                            visibility: 1,
-                            text: 'Apr 18 - Polynomials',
-                            url: 'www.google.ca'
-                        }
-                    },
-                    {
-                        content: {
-                            type: 3,
-                            visibility: 1,
-                            url: 'images/avatar.png'
-                        }
-                    }
-                ]
-            },
-            {
-                id: 2,
-                subjectName: 'SCI 9',
-                subjectInfo: [
-                    {
-                        content: {
-                            type: 2,
-                            visibility: 1,
-                            text: 'May 1 - Biometric analysis'
+                            text: 'Loading Home Page...'
                         }
                     }
                 ]
             }]
         };
     }
+    
 
     componentDidMount() {
-        // this.setState({testData: JSON.parse(localStorage.getItem('myData'))});
-        // console.log(JSON.parse(localStorage.getItem('myData')));
+        this.loadData();
     }
 
     changeSubject = (id) => {
@@ -102,12 +61,33 @@ class App extends React.Component {
     }
 
     accessAdmin = () => {
-        this.setState({ admin: 1 });
+        this.setState({ admin: this.state.admin ? 0 : 1 });
     }
 
-    addData = () => {
+    addSubject = (name) => {
+
+    }
+
+    addData = (type) => {
         let temp = this.state.testData;
+        let tempData = {
+            content: {
+                type: type,
+                visibility: 1,
+                text: '~ New ' + type +  ' ~',
+                url: ''
+            }
+        }
+        temp[this.state.subjectId].subjectInfo.push(tempData);
         this.setState({ testData: temp });
+    }
+
+    loadData = () => {
+        this.setState({testData: JSON.parse(localStorage.getItem('myData'))});
+    }
+
+    saveData = () => {
+        localStorage.setItem('myData', JSON.stringify(this.state.testData));
     }
 
     render() {
@@ -119,7 +99,7 @@ class App extends React.Component {
                         <Subjects data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId} />
                     </div>
                     <div className="col-9">
-                        <SubjectPage data={this.state.testData[this.state.subjectId]} admin={this.state.admin} updateVisibility={this.updateVisibility} addData={this.addData} shiftData={this.shiftData} removeData={this.removeData} />
+                        <SubjectPage data={this.state.testData[this.state.subjectId]} admin={this.state.admin} updateVisibility={this.updateVisibility} addData={this.addData} shiftData={this.shiftData} removeData={this.removeData} loadData={this.loadData} saveData={this.saveData} />
                     </div>
                 </div>
             </div>

@@ -1,6 +1,7 @@
 import React from 'react'
 import SubjectPageElement from './SubjectPageElement';
 import SubjectPageElementAdmin from './SubjectPageElementAdmin';
+import Dropdown from './Dropdown';
 import ElementIcon from './ElementIcon';
 
 class SubjectPage extends React.Component {
@@ -26,8 +27,16 @@ class SubjectPage extends React.Component {
         this.props.removeData(key);
     }
 
-    addElement = (key) => {
-        this.props.addData(key);
+    addElement = (type) => {
+        this.props.addData(type);
+    }
+
+    saveData = () => {
+        this.props.saveData();
+    }
+
+    loadData = () => {
+        this.props.loadData();
     }
 
     render() {
@@ -41,11 +50,15 @@ class SubjectPage extends React.Component {
                 <div className="container">
                     <div className="d-flex align-items-center">
                         <h2 className="flex-grow-1">{subjectName}</h2>
-                        <ElementIcon type={'plus'} />
+                        <Dropdown returnFunction={this.addElement} />
                     </div>
                     <ul className="list-group">
                         {SubjectContent}
                     </ul>
+                    <div className="float-right">
+                        <ElementIcon type="save" params={null} returnFunction={this.saveData} /> Save
+                        <ElementIcon type="undo" params={null} returnFunction={this.loadData} /> Discard Changes
+                    </div>
                 </div>
             );
         } else {
