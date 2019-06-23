@@ -3,7 +3,7 @@ import React from 'react';
 class SubjectPageElement extends React.Component {
     render() {
         const { content } = this.props.content;
-        switch(content.type) {
+        switch (content.type) {
             case 'heading':
                 return <h3>{content.text}</h3>
             case 'font':

@@ -1,8 +1,8 @@
 import React from 'react'
 import SubjectPageElement from './SubjectPageElement';
 import SubjectPageElementAdmin from './SubjectPageElementAdmin';
-import Dropdown from './Dropdown';
-import ElementIcon from './ElementIcon';
+import Dropdown from '../BootstrapComponents/Dropdown';
+import ElementIcon from '../BootstrapComponents/ElementIcon';
 
 class SubjectPage extends React.Component {
 
@@ -63,6 +63,9 @@ class SubjectPage extends React.Component {
             );
         } else {
             const SubjectContent = subjectInfo.map((content) => {
+                if(content.content.visibility === 0) {
+                    return null;
+                }
                 return <SubjectPageElement key={count++} content={content} />
             });
             return (

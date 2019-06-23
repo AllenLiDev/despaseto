@@ -10,6 +10,7 @@ const Subjects = (props) => {
     });
     return (
         <ul className="list-group">
+            <li className="list-group-item list-group-item-dark" >Subjects </li>
             {subjects}
         </ul>
     );

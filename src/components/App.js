@@ -1,6 +1,7 @@
 import React from 'react';
-import Header from './Header';
+import Header from './Header/Header';
 import Subjects from './SubjectsSidebar/Subjects';
+import SubjectsAdmin from './SubjectsSidebar/SubjectsAdmin';
 import SubjectPage from './ContentArea/SubjectPage';
 
 class App extends React.Component {
@@ -24,7 +25,7 @@ class App extends React.Component {
             }]
         };
     }
-    
+
 
     componentDidMount() {
         this.loadData();
@@ -32,6 +33,10 @@ class App extends React.Component {
 
     changeSubject = (id) => {
         this.setState({ subjectId: id });
+    }
+
+    addSubject = () => {
+        let temp = this.state.testData;
     }
 
     shiftData = (direction, key) => {
@@ -74,7 +79,7 @@ class App extends React.Component {
             content: {
                 type: type,
                 visibility: 1,
-                text: '~ New ' + type +  ' ~',
+                text: '~ New ' + type + ' ~',
                 url: ''
             }
         }
@@ -83,7 +88,7 @@ class App extends React.Component {
     }
 
     loadData = () => {
-        this.setState({testData: JSON.parse(localStorage.getItem('myData'))});
+        this.setState({ testData: JSON.parse(localStorage.getItem('myData')) });
     }
 
     saveData = () => {
@@ -96,7 +101,8 @@ class App extends React.Component {
                 <Header accessAdmin={this.accessAdmin} />
                 <div className="row">
                     <div className="col-3">
-                        <Subjects data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId} />
+                        {/* <Subjects data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId} /> */}
+                        <SubjectsAdmin data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId} />
                     </div>
                     <div className="col-9">
                         <SubjectPage data={this.state.testData[this.state.subjectId]} admin={this.state.admin} updateVisibility={this.updateVisibility} addData={this.addData} shiftData={this.shiftData} removeData={this.removeData} loadData={this.loadData} saveData={this.saveData} />
