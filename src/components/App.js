@@ -1,14 +1,14 @@
 import React from 'react';
 import Header from './Header/Header';
 import Subjects from './SubjectsSidebar/Subjects';
-import SubjectsAdmin from './SubjectsSidebar/SubjectsAdmin';
 import SubjectPage from './ContentArea/SubjectPage';
+import ElementIcon from './BootstrapComponents/ElementIcon';
 
 class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            admin: 0,
+            admin: 1,
             subjectId: 0,
             testData: [{
                 id: 0,
@@ -26,17 +26,12 @@ class App extends React.Component {
         };
     }
 
-
     componentDidMount() {
         this.loadData();
     }
 
     changeSubject = (id) => {
         this.setState({ subjectId: id });
-    }
-
-    addSubject = () => {
-        let temp = this.state.testData;
     }
 
     shiftData = (direction, key) => {
@@ -69,8 +64,23 @@ class App extends React.Component {
         this.setState({ admin: this.state.admin ? 0 : 1 });
     }
 
-    addSubject = (name) => {
-
+    addSubject = () => {
+        let temp = this.state.testData;
+        let tempData = {
+            id: this.state.testData.length,
+            subjectName: 'New Subject',
+            subjectInfo: [
+                {
+                    content: {
+                        type: 'heading',
+                        visibility: 1,
+                        text: 'New Heading.'
+                    }
+                }
+            ]
+        }
+        temp.push(tempData);
+        this.setState({ testData: temp });
     }
 
     addData = (type) => {
@@ -96,13 +106,21 @@ class App extends React.Component {
     }
 
     render() {
+        const adminDiv = (
+            <div className="d-flex align-items-center">
+                <ElementIcon type="user-shield" />
+                <div className="flex-grow-1">Admin</div>
+                <ElementIcon type="save" params={null} returnFunction={this.saveData} /> Save
+                <ElementIcon type="undo" params={null} returnFunction={this.loadData} /> Discard Changes
+            </div>
+        )
         return (
-            <div className="container">
+            <div className="container-fluid">
                 <Header accessAdmin={this.accessAdmin} />
+                {this.state.admin ? adminDiv : null}
                 <div className="row">
                     <div className="col-3">
-                        {/* <Subjects data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId} /> */}
-                        <SubjectsAdmin data={this.state.testData} changeSubject={this.changeSubject} activeId={this.state.subjectId} />
+                        <Subjects data={this.state.testData} admin={this.state.admin} changeSubject={this.changeSubject} activeId={this.state.subjectId} addSubject={this.addSubject} />
                     </div>
                     <div className="col-9">
                         <SubjectPage data={this.state.testData[this.state.subjectId]} admin={this.state.admin} updateVisibility={this.updateVisibility} addData={this.addData} shiftData={this.shiftData} removeData={this.removeData} loadData={this.loadData} saveData={this.saveData} />

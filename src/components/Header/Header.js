@@ -13,10 +13,10 @@ class Header extends React.Component {
                 <div className="jumbotron">
                     <h1 className="display-4">MS. SETO</h1>
                     <p className="lead">Contact: aseto@sd40.bc.ca</p>
-                    <i className="fas fa-user-shield admin" data-toggle="modal" data-target="#exampleModalCenter"></i>
+                    <i className="fas fa-user-shield admin-icon" data-toggle="modal" data-target="#adminModal"/>
                 </div>
 
-                <Modal returnFunction={this.accessAdmin} />
+                <Modal title="Admin Login" id={"adminModal"} returnFunction={this.accessAdmin} />
             </div>
         );
     }
